@@ -15,6 +15,14 @@ import Lab2FunctionsNoPlot as l2f
 import EEfunctions as EE
 
 
+def newX_axis(distance):
+    X_list =[0]*726
+    X_val  = 0 
+    for i in range(len(distance)):
+        X_val = X_val + distance[i]
+        X_list[i] = X_val
+    return X_list
+
 "MAIN CODE SUBMISSIO 1.0"
 
 #Question 1 - diagram
@@ -42,7 +50,7 @@ plt.plot(restingecg_Ben.t, restingecg_Ben.ecg, color = "b", label = 'Raw ECG')
 plt.plot(restingecg_Ben.t, filt_restingecg_Ben, color = "orange", label = ' Filtered ECG')
 plt.xlim([43,48])
 plt.xlabel('Time [s]')  
-plt.ylabel('Electrical Activity [mV]')
+plt.ylabel('ECG Amplitude [mV]')
 plt.title("Q2 Ben's ECG Measure")
 plt.legend()
 
@@ -63,7 +71,7 @@ plt.plot(restingecg_Chase.t, filt_restingecg_Chase, label = 'Filtered ECG')
 plt.axis([320, 325, 270, 410])
 plt.title("Q2 Chase's Resting ECG Measure")
 plt.xlabel("Time (s)")
-plt.ylabel("ECG Amplitude ()")
+plt.ylabel("ECG Amplitude (mV)")
 plt.legend()
 
 #question 3 - written
@@ -151,24 +159,25 @@ filt_bikeecg_Chase = scipy.signal.filtfilt(b, a, bikeecg_Chase.ecg)
 d_ecg, peaks_d_ecg = l2f.decg_peaks(bikeecg_Chase.ecg, bikeecg_Chase.t)
 Rwave_peaks_d_ecg = l2f.d_ecg_peaks(d_ecg, peaks_d_ecg, bikeecg_Chase.t, 0.4, 0.5)
 bikeecg_Rwave_t = l2f.Rwave_peaks(bikeecg_Chase.ecg, d_ecg, Rwave_peaks_d_ecg, bikeecg_Chase.t)
-RR_interval = np.diff(bikeecg_Rwave_t)
 
+RR_interval = np.diff(bikeecg_Rwave_t)
 heartrate_bike_Chase = (1/RR_interval)*60
 
 Wn = 0.1
 b2, a2 = scipy.signal.butter(4, Wn, 'low', analog = False) 
 filt_heartrate_Chase = scipy.signal.filtfilt(b2, a2, heartrate_bike_Chase) 
+heartrate_bike_chase_X = l2f.newX_axis(RR_interval)
 
 plt.figure(8)
-plt.plot(heartrate_bike_Chase)
-plt.plot(filt_heartrate_Chase)
+plt.plot(heartrate_bike_chase_X, heartrate_bike_Chase)
+plt.plot(heartrate_bike_chase_X, filt_heartrate_Chase)
 plt.title("Q7 Filtered Heart Rate During Stationary Bike Exercise Experiment")
 plt.xlabel('Time (s)')
 plt.ylabel('Heart Rate (bpm)')
 
 #Question 8 - Chase increase exercise workload
 plt.figure(9)
-plt.plot(filt_heartrate_Chase)
+plt.plot(heartrate_bike_chase_X,filt_heartrate_Chase)
 plt.axis([60, 220, 45, 120])
 plt.title("Q8 Heart Rate During Increased Workload on Stationary Bike")
 plt.xlabel('Time (s)')
@@ -176,7 +185,7 @@ plt.ylabel('Heart Rate (bpm)')
 
 #Question 9 - Chase decrease exercise workload
 plt.figure(10)
-plt.plot(filt_heartrate_Chase)
+plt.plot(heartrate_bike_chase_X,filt_heartrate_Chase)
 plt.axis([400, 620, 45, 135]) 
 plt.title("Q9 Heart Rate During Decreased Workload on Stationary Bike")
 plt.xlabel('Time(s)')
@@ -189,7 +198,7 @@ plt.ylabel('Heart Rate (bpm)')
 Chase_EE_lst = EE.EE_high_lst(filt_heartrate_Chase, 47.1, 56.7)
 
 plt.figure(11)
-plt.plot(Chase_EE_lst)
+plt.plot(heartrate_bike_chase_X,Chase_EE_lst)
 plt.title("Q11 Energy Expenditure Exercise Experiment")
 plt.xlabel('Time (s)')
 plt.ylabel('Predicted Energy Expenditure [kcal/min]')
