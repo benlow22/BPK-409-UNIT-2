@@ -133,6 +133,38 @@ heartrate_Ben = (1/RR_interval_Ben)*60
 print("Ben's average HR =", sum(heartrate_Ben)/len(heartrate_Ben))
 print("Ben's HRV = ", np.std(heartrate_Ben))
 
+
+Wn = 0.1
+b, a = scipy.signal.butter(4, Wn, 'low', analog = False)
+filt_restingecg_Eugene = scipy.signal.filtfilt(b, a, restingecg_Eugene.ecg)
+
+peaks,_ = scipy.signal.find_peaks(filt_restingecg_Eugene, height = 330)
+
+# step1
+d_ecg, peaks_d_ecg = l2f.decg_peaks(restingecg_Eugene.ecg, restingecg_Eugene.t)
+# step2
+Rwave_peaks_d_ecg = l2f.d_ecg_peaks(d_ecg, peaks_d_ecg, restingecg_Eugene.t, 0.9, 1.3)
+# step3
+resting_Rwave_t = l2f.Rwave_peaks(restingecg_Eugene.ecg, d_ecg, Rwave_peaks_d_ecg, restingecg_Eugene.t)
+
+
+
+# Eugene's HR
+RR_interval_Eugene = np.diff(resting_Rwave_t)
+
+
+heartrate_Eugene = (1/RR_interval_Eugene)*60
+
+
+b2, a2 = scipy.signal.butter(4, Wn, 'low')
+filt_heartrate_Eugene = scipy.signal.filtfilt(b2, a2, heartrate_Eugene)
+
+
+print ('\n')
+print ("Eugene's Mean Resting HR =", sum(filt_heartrate_Eugene/len(filt_heartrate_Eugene)))
+print ("Eugenes HRV =", np.std(filt_heartrate_Eugene))
+
+
 #Question 6 - Class' histograms
 column_names_HRV = [
     "name",
