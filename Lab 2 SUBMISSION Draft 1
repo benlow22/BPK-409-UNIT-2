@@ -71,7 +71,7 @@ plt.legend()
         #Eugene
 file = 'Lab2RestingECG_Eugene.txt'
 
-restingecg_Eugene = pd.read_csv(file, names = column_names, sep = '\t', skiprows= 5000, skipfooter= 5000)
+restingecg_Eugene = pd.read_csv(file, names = column_names, sep = '\t', skiprows= 5000, skipfooter= 5000, engine = 'python')
 
 #change time to seconds
 restingecg_Eugene.t = restingecg_Eugene.t/1000
