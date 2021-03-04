@@ -162,7 +162,6 @@ filt_heartrate_Chase = scipy.signal.filtfilt(b2, a2, heartrate_bike_Chase)
 heartrate_bike_chase_X = l2f.newX_axis(RR_interval)
 
 plt.figure(8)
-plt.plot(heartrate_bike_chase_X, heartrate_bike_Chase)
 plt.plot(heartrate_bike_chase_X, filt_heartrate_Chase)
 plt.title("Q7 Filtered Heart Rate During Stationary Bike Exercise Experiment")
 plt.xlabel('Time (s)')
