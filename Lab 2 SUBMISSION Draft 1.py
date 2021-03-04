@@ -293,4 +293,12 @@ plt.ylabel('Predicted Energy Expenditure [kcal/min]')
 EE_sum = np.sum(Chase_EE_lst/filt_heartrate_Chase)
 print("total EE = ", round(EE_sum,2), "kcal")
 
+#Question 12 - total EE
+EE_sum = np.sum(Chase_EE_lst/filt_heartrate_Chase)
+print("total EE = ", round(EE_sum,2), "kcal")
+
+print("total EE in Chocolate bars = ", round(EE_sum/500,2), "500kcal bars")
+print("total EE in Joules = ", round(EE_sum*4184,2), "Joules")
+print("total EE in %Daily EE = ", round(EE_sum/2000,2), "%")
+
 #Question 13 - DONE
