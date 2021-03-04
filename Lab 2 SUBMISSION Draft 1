@@ -85,7 +85,7 @@ plt.plot(restingecg_Eugene.t, restingecg_Eugene.ecg, label = 'Raw ECG')
 plt.plot(restingecg_Eugene.t, filt_restingecg_Eugene, label = 'Filtered ECG')
 plt.xlim([100,105])
 plt.xlabel('Time (sec)')  
-plt.ylabel('ECG amplitude (mV)')
+plt.ylabel('ECG Amplitude (mV)')
 plt.title("Q2 Eugene's Resting ECG Measure")
 plt.legend()
 
