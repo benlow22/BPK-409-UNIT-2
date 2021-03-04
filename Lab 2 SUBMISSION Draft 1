@@ -15,13 +15,6 @@ import Lab2FunctionsNoPlot as l2f
 import EEfunctions as EE
 
 
-def newX_axis(distance):
-    X_list =[0]*726
-    X_val  = 0 
-    for i in range(len(distance)):
-        X_val = X_val + distance[i]
-        X_list[i] = X_val
-    return X_list
 
 "MAIN CODE SUBMISSIO 1.0"
 
