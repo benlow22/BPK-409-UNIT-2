@@ -182,6 +182,24 @@ print ('\n')
 print ("Eugene's Mean Resting HR =", sum(filt_heartrate_Eugene/len(filt_heartrate_Eugene)))
 print ("Eugenes HRV =", np.std(filt_heartrate_Eugene))
 
+#Jakob's HR
+
+d_ecg, peaks_d_ecg = l2f.decg_peaks(restingecg_Jakob.ecg, restingecg_Jakob.t)
+# step2
+Rwave_peaks_d_ecg = l2f.d_ecg_peaks(d_ecg, peaks_d_ecg, restingecg_Jakob.t, 0.9, 1.3)
+# step3
+resting_Rwave_t = l2f.Rwave_peaks(restingecg_Jakob.ecg, d_ecg, Rwave_peaks_d_ecg, restingecg_Jakob.t)
+# HR
+RR_interval_Jakob = np.diff(resting_Rwave_t)
+heartrate_Jakob = (1/RR_interval_Jakob)*60
+b2, a2 = scipy.signal.butter(4, Wn, 'low')
+filt_heartrate_Jakob = scipy.signal.filtfilt(b2, a2, heartrate_Jakob)
+
+
+print ('\n')
+print ("Jakob's Mean Resting HR =", sum(filt_heartrate_Jakob/len(filt_heartrate_Jakob)))
+print ("Jakob's HRV =", np.std(filt_heartrate_Jakob))
+
 
 #Question 6 - Class' histograms
 column_names_HRV = [
