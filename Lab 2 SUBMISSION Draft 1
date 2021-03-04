@@ -139,6 +139,7 @@ filt_heartrate_Chase = scipy.signal.filtfilt(b2, a2, heartrate_resting_Chase)
 avg = sum(filt_heartrate_Chase)/len(filt_heartrate_Chase)
 print("Chase's average HR = ", round(avg,2))
 print("Chase's HRV = ", np.std(filt_heartrate_Chase))
+print ('\n')
 
 # Ben's HR
 
@@ -199,6 +200,7 @@ filt_heartrate_Jakob = scipy.signal.filtfilt(b2, a2, heartrate_Jakob)
 print ('\n')
 print ("Jakob's Mean Resting HR =", sum(filt_heartrate_Jakob/len(filt_heartrate_Jakob)))
 print ("Jakob's HRV =", np.std(filt_heartrate_Jakob))
+print ('\n')
 
 
 
