@@ -67,6 +67,29 @@ plt.xlabel("Time (s)")
 plt.ylabel("ECG Amplitude (mV)")
 plt.legend()
 
+
+        #Eugene
+file = 'Lab2RestingECG_Eugene.txt'
+
+restingecg_Eugene = pd.read_csv(file, names = column_names, sep = '\t', skiprows= 5000, skipfooter= 5000)
+
+#change time to seconds
+restingecg_Eugene.t = restingecg_Eugene.t/1000
+
+Wn = 0.1
+b, a = scipy.signal.butter(4, Wn, 'low', analog = False)
+filt_restingecg_Eugene = scipy.signal.filtfilt(b, a, restingecg_Eugene.ecg)
+
+plt.figure(3)
+plt.plot(restingecg_Eugene.t, restingecg_Eugene.ecg, label = 'Raw ECG')
+plt.plot(restingecg_Eugene.t, filt_restingecg_Eugene, label = 'Filtered ECG')
+plt.xlim([100,105])
+plt.xlabel('Time (sec)')  
+plt.ylabel('ECG amplitude (mV)')
+plt.title("Q2 Eugene's Resting ECG Measure")
+plt.legend()
+
+
 #question 3 - written
 
 #Question 4 - 5s if Chase filtered ECG with peaks
