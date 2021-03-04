@@ -91,7 +91,7 @@ plt.legend()
 
 #Jakob
 restingecg_Jakob = pd.read_csv('Lab2Part1_4JAKOB1.txt',
-                         names=column_names, sep = '\t', skiprows= 10000, skipfooter= 5000, engine = 'python')
+                         names=column_names, sep = '\t', skiprows= 60600, skipfooter= 17000, engine = 'python')
 restingecg_Jakob.t = restingecg_Jakob.t/1000
 
 Wn = 0.1
@@ -99,10 +99,10 @@ b, a = scipy.signal.butter(4, Wn, 'low', analog = False)
 filt_restingecg_Jakob = scipy.signal.filtfilt(b, a, restingecg_Jakob.ecg)
 
 
-plt.figure(3)
+plt.figure(4)
 plt.plot(restingecg_Jakob.t, restingecg_Jakob.ecg, label = 'Raw ECG')
 plt.plot(restingecg_Jakob.t, filt_restingecg_Jakob, label = 'Filtered ECG')
-plt.axis([580, 585, 280, 350])
+plt.axis([590, 595, 280, 370])
 plt.title("Q2 Jakob's Resting ECG Measure")
 plt.xlabel("Time (s)")
 plt.ylabel("ECG Amplitude (mV)")
