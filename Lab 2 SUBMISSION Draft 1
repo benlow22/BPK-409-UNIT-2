@@ -171,15 +171,15 @@ plt.ylabel('Heart Rate (bpm)')
 #Question 8 - Chase increase exercise workload
 plt.figure(9)
 plt.plot(heartrate_bike_chase_X,filt_heartrate_Chase)
-plt.axis([60, 220, 45, 120])
+plt.axis([60, 240, 45, 130])
 plt.title("Q8 Heart Rate During Increased Workload on Stationary Bike")
 plt.xlabel('Time (s)')
-plt.ylabel('Heart Rate (bpm)')      
+plt.ylabel('Heart Rate (bpm)')       
 
 #Question 9 - Chase decrease exercise workload
 plt.figure(10)
 plt.plot(heartrate_bike_chase_X,filt_heartrate_Chase)
-plt.axis([400, 620, 45, 135]) 
+plt.axis([240, 480, 45, 135]) 
 plt.title("Q9 Heart Rate During Decreased Workload on Stationary Bike")
 plt.xlabel('Time(s)')
 plt.ylabel('Heart Rate (bpm)') 
